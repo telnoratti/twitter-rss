@@ -3,6 +3,8 @@ twitter-rss
 
 This is a python3 fork of Astalaseven's [twitter-rss][https://github.com/Astalaseven/twitter-rss]. 
 
+This is currently not stable while I make changes to update it to python3 and clean up some bits. The old documentation should still apply.
+
 Rss-generator for Twitter
 
 * Doesn't make use of Twitter API (no registration needed, no 180 requests limitation, ...)
