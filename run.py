@@ -23,7 +23,7 @@ try:
 
             with open(os.path.join(config.XML_DIR + 'htag/htag.txt'), 'r') as hashtags:
                 for htag in hashtags:
-                    twitter_rss.HashtagTweetGetter(user)
+                    twitter_rss.HashtagTweetGetter(htag)
             hashtags.close()
         except IOError:
             print('File could not be read')
