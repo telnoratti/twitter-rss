@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from BeautifulSoup import BeautifulSoup
-import urllib2
+from bs4 import BeautifulSoup
+import urllib.request, urllib.error, urllib.parse
 import re
 import arrow
 import config
@@ -41,7 +41,7 @@ class Tweet(object):
         for item in to_delete:
             output = re.sub(item, '', output)
         for item in to_replace:
-            for old, new in item.items():
+            for old, new in list(item.items()):
                 output = re.sub(old, new, output)
 
         title = output
@@ -56,7 +56,7 @@ class Tweet(object):
         if 'pic.twitter.com' in self.raw_text:
             pic_url = 'http://' + str(re.sub(r'.*dir="ltr">pic.twitter.com/(.*?)</a>.*', r'pic.twitter.com/\1', self.raw_text.encode('utf8')))
 
-            content = urllib2.urlopen(pic_url)
+            content = urllib.request.urlopen(pic_url)
             soup = BeautifulSoup(content)
             pic = re.findall(r'(https?://pbs.twimg.com/media/\S+.\S+:large)', str(soup))[0]
         return pic
@@ -105,8 +105,8 @@ class TweetGetter(object):
 
     def parse_twitter(self):
         try:
-            content = urllib2.urlopen(self.url)
-            print 'Connection successful!'
+            content = urllib.request.urlopen(self.url)
+            print('Connection successful!')
             soup = BeautifulSoup(content)
 
             self.title = soup.title.string
@@ -115,13 +115,13 @@ class TweetGetter(object):
             for content in soup.findAll("div", "content"):
                 for meta, text in zip(content.findAll("small", "time"), content.findAll("p", "js-tweet-text tweet-text")):
                     self.tweets.append(Tweet(text, meta))
-        except urllib2.HTTPError:
-            print 'Error 404: Account not found'
+        except urllib.error.HTTPError:
+            print('Error 404: Account not found')
 
     def to_rss(self, server=config.SERVER):
         try:
             with open(config.INSTALL_DIR + 'rss-model.tpl') as template_file:
-                items = list(map(lambda tweet: tweet.to_jinja2(), self.tweets))
+                items = list([tweet.to_jinja2() for tweet in self.tweets])
                 try:
                     descriptor = self.hashtag
                     directory = 'htag'

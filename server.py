@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, redirect, url_for
@@ -53,7 +53,7 @@ def write_data_to_file(tweets, feed, path):
     err=None
     try:
         data = tweets.to_rss().encode('utf-8')
-        print 'File does not exist: Creating feed...'
+        print('File does not exist: Creating feed...')
         with open(config.XML_DIR + path + '/' + feed + '.xml', 'w') as cache:
             cache.write(data)
         cache.close()
@@ -71,7 +71,7 @@ def save_feed_for_updating(feed, path):
             save.write(feed + '\n')
         save.close()
     except IOError:
-        print 'Could not save ' + feed + ' in ' + path
+        print('Could not save ' + feed + ' in ' + path)
 
 
 @app.errorhandler(404)

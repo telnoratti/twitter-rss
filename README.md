@@ -1,6 +1,8 @@
 twitter-rss
 ===========
 
+This is a python3 fork of Astalaseven's [twitter-rss][https://github.com/Astalaseven/twitter-rss]. 
+
 Rss-generator for Twitter
 
 * Doesn't make use of Twitter API (no registration needed, no 180 requests limitation, ...)
@@ -10,7 +12,7 @@ Rss-generator for Twitter
 
 ## Installation
 
-Requirements : `python2`
+Requirements : `python3`
 
     git clone git://github.com/Astalaseven/twitter-rss.git
 
@@ -24,7 +26,7 @@ You can edit `config.py` file to change the time between two updates (TIMER = 60
 to fetch the tweet pic (PICS = False).
 
     cd twitter-rss/
-    python2 run.py
+    python3 run.py
   
 `run.py` will launch a webserver that can be used to create new feeds. You can also create them by opening 
 `your_server/user/choosen-user-or-hashtag.xml` or by directly write them down in `user/user.txt` and `htag/htag.txt`.
